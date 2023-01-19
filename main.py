@@ -50,10 +50,6 @@ webhookping = os.getenv("USERID")
 class client:
   token = os.getenv("TOKEN")
   webhookping = os.getenv("USERID")
-  commands=[
-    "owoh",
-    "owob"
-    ]
   totalcmd = 0
   totaltext = 0
   stopped = False
@@ -219,10 +215,11 @@ def levelling(resp):
             return "level"
 def runner(): #auto-farm module
         global wbm
-        command=random.choice(client.commands)
-        bot.sendMessage(str(client.channel), command)
-        print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} {command}")
-        client.totalcmd += 1
+        bot.sendMessage(str(client.channel), 'owoh')
+        time.sleep(3)
+        bot.sendMessage(str(client.channel), 'owob')
+        print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} Hunt + Battle")
+        client.totalcmd += 2
         time.sleep(random.randint(wbm[0],wbm[1]))
 def owoexp(): #auto exp module
   if client.em.lower() == "yes":
@@ -435,7 +432,7 @@ def loopie(resp): #timer module
         autoexp()
         text=time.time()
       if client.sm.lower() == "yes":
-       if time.time() - main > random.randint(600, 900) and client.stopped != True:
+       if time.time() - main > random.randint(1600, 1900) and client.stopped != True:
         main=time.time()
         print(f"{at()}{client.color.okblue} [INFO]{client.color.reset} Sleeping")
         time.sleep(random.randint(400, 600))
