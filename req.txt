@@ -1,0 +1,6 @@
+discum
+discord_webhook
+inputimeout
+numpy
+
+
