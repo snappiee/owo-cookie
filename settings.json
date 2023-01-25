@@ -4,11 +4,14 @@
 "sm": "yes",
 "pm": "yes",
 "em": "yes",
+"bm": "yes",
+"farm": "yes",
 "allowedid": "None",
 "prefix": "p",
 "webhook": "https://discord.com/api/webhooks/1065485107634384946/QfRH_9JajayYmKSc3ZFTOp1CdLIpwi0R2rgZ2NyEOCZVvTkaTTmOOH1akgxR00XStUPJ",
 "daily": "yes",
 "stop": "no",
 "change": "yes",
-"text": "yes"
+"text": "yes",
+"autovote": "yes"
 }

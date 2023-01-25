@@ -78,21 +78,7 @@ python-versions = "*"
 [package.dependencies]
 pycparser = "*"
 
-[[package]]
-name = "chardet"
-version = "5.1.0"
-description = "Universal encoding detector for Python 3"
-category = "main"
-optional = false
-python-versions = ">=3.7"
 
-[[package]]
-name = "charset-normalizer"
-version = "2.1.1"
-description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
-category = "main"
-optional = false
-python-versions = ">=3.6.0"
 
 [package.extras]
 unicode_backport = ["unicodedata2"]

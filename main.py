@@ -1,4 +1,4 @@
-
+#made by snappiee; discord: gh0x
 #importing: 
 import keep_alive
 import string
@@ -37,16 +37,18 @@ except:
  install()
 finally:
  from discord_webhook import DiscordWebhook
+
 #starting bot:
 print("""\
 owo self bot.
 **Version: 6.9.6**
 Remade version - no updates supported.
 Edit your options in the settings.json file or Enter information when in start.
+This is for Replit hosting, make 2 secrets: 
+'TOKEN', 'USERID' for the main selfbot
 """)
-wbm=[16,19]
-token = os.getenv("TOKEN")
-webhookping = os.getenv("USERID")
+wbm=[16,18]
+
 class client:
   token = os.getenv("TOKEN")
   webhookping = os.getenv("USERID")
@@ -73,6 +75,7 @@ class client:
         sm = data["sm"]
         pm = data["pm"]
         em = data["em"]
+        bm = data["bm"]
         prefix = data["prefix"]
         allowedid = data["allowedid"]
         webhook = data["webhook"]
@@ -80,6 +83,7 @@ class client:
         stop = data["stop"]
         change = data["change"]
         text = data["text"]
+        farm = data["farm"]
   f = open('stopped.txt', 'r')
   content = f.read()
   if "True" in content:
@@ -105,7 +109,7 @@ class client:
     pass
   elif response.status_code == 429:
     print(f"{color.fail}[ERROR]{color.reset} Too Many Requests! Try Again Later.")
-    time.sleep(2)
+    time.sleep(300)
     raise SystemExit
   elif response.status_code == 404:
     print(f"{color.fail}[ERROR]{color.reset} Invalid Token")
@@ -123,8 +127,9 @@ try:
 except TimeoutOccurred:
  choice = "1"
 if choice == "1":
-      pass
+ pass
 elif choice == "2":
+ print("Read the instructions")
  pass
 elif choice == "3":
       print(f'{client.color.purple} =========Selfbot Commands=========={client.color.reset}')
@@ -146,7 +151,7 @@ else:
  os.execl(executable, executable, *argv)
 def at():
   return f'\033[0;93m{time.strftime("%d/%m/%Y | %H:%M:%S", time.localtime())}\033[0;21m'
-bot = discum.Client(token=client.token, log=False)
+bot = discum.Client(token = client.token, log = False)
 @bot.gateway.command
 def on_ready(resp):
     if resp.event.ready_supplemental: #ready_supplemental is sent after ready
@@ -162,14 +167,17 @@ def security(resp): #webhook for captcha mode
      sentwebhook = DiscordWebhook(url=client.webhook, content='<@{}> Captcha in: <#{}>'.format(client.webhookping,client.channel))
      response = sentwebhook.execute()
      bot.gateway.close()
+     atexit()
     else:
      sentwebhook = DiscordWebhook(url=client.webhook, content='<@{}> <@{}> Captcha in: <#{}>'.format(user['id'],client.allowedid,client.channel))
      response = sentwebhook.execute()
      bot.gateway.close()
+     atexit()
  if client.webhook == 'None':
   if issuechecker(resp) == "captcha":
    client.stopped = True
    bot.gateway.close()
+   atexit()
 @bot.gateway.command
 def issuechecker(resp):
  if resp.event.message:
@@ -177,14 +185,14 @@ def issuechecker(resp):
    if m['channel_id'] == client.channel and client.stopped != True:
     if m['author']['id'] == '408785106942164992' or m['author']['username'] == 'OwO' or m['author']['discriminator'] == '8456' or m['author']['public_flags'] == '65536':
      if 'captcha' in m['content'].lower():
-       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
+       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA . ACTION REQUİRED')
        f = open("stopped.txt","w")
        f.write('True')
        return "captcha"
      if 'complete your captcha to verify that you are human!'  in m['content']:
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA . ACTION REQUİRED')
        return "captcha"
-     if 'DM' in m['content'].lower():
+     if '/5' in m['content'].lower():
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA . ACTION REQUİRED')
        return "captcha" #captcha detection
      
@@ -215,28 +223,32 @@ def levelling(resp):
             return "level"
 def runner(): #auto-farm module
         global wbm
+        time.sleep(2)
         bot.sendMessage(str(client.channel), 'owoh')
-        time.sleep(3)
+        print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} Hunt")
+        time.sleep(5)
         bot.sendMessage(str(client.channel), 'owob')
-        print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} Hunt + Battle")
+        print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} Battle")
         client.totalcmd += 2
         time.sleep(random.randint(wbm[0],wbm[1]))
 def owoexp(): #auto exp module
   if client.em.lower() == "yes":
     time.sleep(3)
     bot.sendMessage(str(client.channel), "owo")
-    print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owo")
+    print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} owo")
+    time.sleep(2)
 def autoexp():
   if client.text.lower() == "yes":
-   ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k = 100))    
+   ran = ''.join(random.choices(string.ascii_letters + string.digits, k = 100))    
    time.sleep(2)
    bot.sendMessage(str(client.channel), ran)
-   print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} Randomly generated string")
+   print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} Random string")
+   time.sleep(2)
 def owopray(): #pray module
   if client.pm.lower() == "yes":
    if client.stopped != True:
     bot.sendMessage(str(client.channel), "owopray")
-    print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owopray")
+    print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} owopray")
     client.totalcmd += 1
     time.sleep(random.randint(13,18))
 @bot.gateway.command
@@ -259,7 +271,7 @@ def gems2(resp): #gem using status
 def gems1(): #gem using
     time.sleep(3)
     bot.sendMessage(str(client.channel), "owoinv")
-    print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owoinv")
+    print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} owoinv")
     client.totalcmd += 1
     time.sleep(4)
     msgs=bot.getMessages(str(client.channel), num=5)
@@ -280,12 +292,12 @@ def gems1(): #gem using
     else:
       if '050' in inv:
         bot.sendMessage(str(client.channel), "owolb all")
-        print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owolb all")
+        print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} owolb all")
         time.sleep(13)
         gems1()
       if '100' in inv:
         bot.sendMessage(str(client.channel), "owowc all")
-        print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owocrate all")
+        print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} owocrate all")
         time.sleep(2)
       for item in inv:
         try:
@@ -294,7 +306,7 @@ def gems1(): #gem using
         except: #backgounds etc
           inv.pop(inv.index(item))
       tier = [[],[],[]]
-      print(f"{at()}{client.color.okblue} [INFO] {client.color.reset} Found {len(inv)} gems in the inventory")
+      print(f"{at()} {client.color.okblue}[INFO]{client.color.reset} Found {len(inv)} gems in the inventory")
       for gem in inv:
         gem = re.sub(r"[^a-zA-Z0-9]", "", gem)
         gem = int(float(gem))
@@ -308,12 +320,12 @@ def gems1(): #gem using
         if not len(tier[level]) == 0:
           time.sleep(5)
           bot.sendMessage(str(client.channel), "owouse "+str(max(tier[level])))
-          print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owouse {str(max(tier[level]))}")
+          print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} owouse {str(max(tier[level]))}")
 def daily(): #claim daily mode
  if client.daily.lower() == "yes" and client.stopped != True:
-    time.sleep(3)
+    time.sleep(1)
     bot.sendMessage(str(client.channel), "owodaily")
-    print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owodaily")
+    print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} owodaily")
     client.totalcmd += 1
     time.sleep(3)
     msgs=bot.getMessages(str(client.channel), num=5)
@@ -336,7 +348,7 @@ def daily(): #claim daily mode
          client.wait_time_daily = str(int(daily[0]) * 3600 + int(daily[1]) * 60 + int(daily[2]))
          print(f"{at()}{client.color.okblue} [INFO] {client.color.reset} Next Daily: {client.wait_time_daily}s")
        if "Your next daily" in daily:
-         print(f"{at()}{client.color.okblue} [INFO] {client.color.reset} Claimed Daily Rewards")
+         print(f"{at()}{client.color.okblue}[INFO]{client.color.reset} Claimed Daily Rewards")
 @bot.gateway.command
 def othercommands(resp):
  prefix = client.prefix
@@ -352,90 +364,94 @@ def othercommands(resp):
      print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} {message}")
     if "{}restart".format(prefix) in m['content'].lower(): #restarting
      bot.sendMessage(str(m['channel_id']), "Restarting...")
-     print(f"{at()}{client.color.okcyan} [INFO] Restarting...  {client.color.reset}")
+     print(f"{at()}{client.color.okcyan}[INFO] Restarting...  {client.color.reset}")
      time.sleep(1)
      os.execl(executable, executable, *argv)
     if "{}exit".format(prefix) in m['content'].lower(): #exit
      bot.sendMessage(str(m['channel_id']), "Exiting...")
-     print(f"{at()}{client.color.okcyan} [INFO] Exiting...  {client.color.reset}")
+     print(f"{at()}{client.color.okcyan}[INFO] Exiting...  {client.color.reset}")
      bot.gateway.close()
     if "{}gm".format(prefix) in m['content'].lower(): #gems mode
      if "on" in m['content'].lower():
       client.gm = "YES"
       bot.sendMessage(str(m['channel_id']), "Turned On Gems Mode")
-      print(f"{at()}{client.color.okcyan} [INFO] Turned On Gems Mode{client.color.okcyan}")
+      print(f"{at()}{client.color.okcyan}[INFO] Turned On Gems Mode{client.color.okcyan}")
      if "off" in m['content'].lower():
       client.gm = "NO"
       bot.sendMessage(str(m['channel_id']), "Turned Off Gems Mode")
-      print(f"{at()}{client.color.okcyan} [INFO] Turned Off Gems Mode{client.color.okcyan}")
+      print(f"{at()}{client.color.okcyan}[INFO] Turned Off Gems Mode{client.color.okcyan}")
     if "{}pm".format(prefix) in m['content'].lower(): #pray mode
       if "on" in m['content'].lower():
        client.pm = "YES"
        bot.sendMessage(str(m['channel_id']), "Turned On Pray Mode")
-       print(f"{at()}{client.color.okcyan} [INFO] Turned On Pray Mode{client.color.reset}")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned On Pray Mode{client.color.reset}")
       if "off" in m['content'].lower():
        client.pm = "NO"
        bot.sendMessage(str(m['channel_id']), "Turned Off Pray Mode")
-       print(f"{at()}{client.color.okcyan} [INFO] Turned Off Pray Mode{client.color.reset}")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned Off Pray Mode{client.color.reset}")
     if "{}sm".format(prefix) in m['content'].lower(): #sleep mode
       if "on" in m['content'].lower():
        client.sm = "603"
        bot.sendMessage(str(m['channel_id']), "Turned On Sleep Mode")
-       print(f"{at()}{client.color.okcyan} [INFO] Turned On Sleep Mode{client.color.reset}")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned On Sleep Mode{client.color.reset}")
       if "off" in m['content'].lower():
        client.sm = "NO"
        bot.sendMessage(str(m['channel_id']), "Turned Off Sleep Mode")
-       print(f"{at()}{client.color.okcyan} [INFO] Turned Off Sleep Mode{client.color.reset}")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned Off Sleep Mode{client.color.reset}")
     if "{}em".format(prefix) in m['content'].lower(): #exp mode
       if "on" in m['content'].lower():
        client.em = "YES"
        bot.sendMessage(str(m['channel_id']), "Turned On Exp Mode")
-       print(f"{at()}{client.color.okcyan} [INFO] Turned On Exp Mode{client.color.reset}")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned On Exp Mode{client.color.reset}")
       if "off" in m['content'].lower():
        client.em = "NO"
        bot.sendMessage(str(m['channel_id']), "Turned Off Exp Mode")
-       print(f"{at()}{client.color.okcyan} [INFO] Turned Off Exp Mode{client.color.reset}")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned Off Exp Mode{client.color.reset}")
     if "{}gems".format(prefix) in m['content'].lower():
        gems1()
     if "{}change".format(prefix) in m['content'].lower(): #change
       if "on" in m['content'].lower():
        client.change = "yes"
        bot.sendMessage(str(m['channel_id']), "Turned On Change Channel Mode")
-       print(f"{at()}{client.color.okcyan} [INFO] Turned On Change Channel Mode{client.color.reset}")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned On Change Channel Mode{client.color.reset}")
       if "off" in m['content'].lower():
        client.change = "no"
        bot.sendMessage(str(m['channel_id']), "Turned Off Change Channel Mode")
-       print(f"{at()}{client.color.okcyan} [INFO] Turned Off Change Channel Mode{client.color.reset}")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned Off Change Channel Mode{client.color.reset}")
 @bot.gateway.command
 def loopie(resp): #timer module
  if resp.event.ready:
-  x=True
+  x = True
   pray = 0
-  owo=pray
-  text=pray
+  owo = pray
   daily_time = pray
-  main=time.time()
-  stop=main
+  main = time.time()
+  stop = main
   change = main
   while x:
     if client.stopped == True:
        break
     if client.stopped != True:
-      runner()
+      if client.farm.lower() == "yes":
+        runner()
       if time.time() - pray > random.randint(300, 600) and client.stopped != True:
         owopray()
         pray=time.time()
       if time.time() - owo > random.randint(20, 30) and client.stopped != True:
         owoexp()
-        owo=time.time()
-      if time.time() - text > random.randint(30, 40) and client.stopped != True:
+        time.sleep(5)
         autoexp()
-        text=time.time()
+        owo=time.time()
       if client.sm.lower() == "yes":
-       if time.time() - main > random.randint(1600, 1900) and client.stopped != True:
+       if time.time() - main > random.randint(4000, 4500) and client.stopped != True:
         main=time.time()
-        print(f"{at()}{client.color.okblue} [INFO]{client.color.reset} Sleeping")
-        time.sleep(random.randint(400, 600))
+        print(f"{at()} {client.color.okblue}[INFO]{client.color.reset} Sleeping")
+        time.sleep(random.randint(1600, 1900))
+      if client.bm.lower() == "yes":
+       if time.time() - main > random.randint(300, 400) and client.stopped != True:
+        main=time.time()
+        print(f"{at()} {client.color.okblue}[INFO]{client.color.reset} Taking a break")
+        time.sleep(random.randint(40, 80))
       if time.time() - daily_time > int(client.wait_time_daily) and client.stopped != True:
         daily()
         daily_time = time.time()
@@ -445,8 +461,10 @@ def loopie(resp): #timer module
       if client.change.lower() == "yes" and client.stopped != True:
         if time.time() - change > random.randint(600, 900):
          change=time.time()
-         print(f"{at()}{client.color.okblue} [INFO] {client.color.reset} Changed Channel To: {client.channel2[1]}")
+         print(f"{at()} {client.color.okblue}[INFO]{client.color.reset} Changed Channel To: {client.channel2[1]}")
          client.channel = client.channel2[0]
+         sentwebhook = DiscordWebhook(url=client.webhook, content='<@{}> Changed channel: <#{}>'.format(client.webhookping,client.channel))
+         response = sentwebhook.execute()
       
 def defination1(): #cpu calculation with bot
   global once
