@@ -181,10 +181,10 @@ def issuechecker(resp):
        f = open("stopped.txt","w")
        f.write('True')
        return "captcha"
-     if 'complete your captcha to verify that you are human!'  in m['content']:
+     if 'you are human!'  in m['content']:
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA . ACTION REQUİRED')
        return "captcha"
-     if '/5' in m['content'].lower():
+     if '/5)' in m['content'].lower():
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA . ACTION REQUİRED')
        return "captcha" #captcha detection
      
@@ -212,6 +212,8 @@ def levelling(resp):
          if m['author']['id'] == '408785106942164992' or m['author']['username'] == 'OwO' or m['author']['discriminator'] == '8456' or m['author']['public_flags'] == '65536':
            if 'level' in m['content'].lower():
             print(f'{at()}{client.color.warning} Level up! {client.color.reset}')
+            sentwebhook = DiscordWebhook(url=client.webhook, content='<@{}> Level up!'.format(client.webhookping))
+            response = sentwebhook.execute()
 def runner(): #auto-farm module
         global wbm
         time.sleep(2)
@@ -319,11 +321,11 @@ def daily(): #claim daily mode
     print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} Claiming daily")
     client.totalcmd += 1
     time.sleep(3)
-
-
-    print(f"{at()}{client.color.okblue} [INFO] {client.color.reset} Next Daily: 24hrs")
-    if "Your next daily" in daily:
-      print(f"{at()}{client.color.okblue}[INFO]{client.color.reset} Claimed Daily Rewards")
+    print(f"{at()} {client.color.okblue}[INFO]{client.color.reset} Claimed Daily Rewards")
+    bot.sendMessage(str(client.channel), "owoclaim")
+    time.sleep(5)
+    bot.sendMessage(str(client.channel), "owoq")
+    client.daily = "no"
 @bot.gateway.command
 def othercommands(resp):
  prefix = client.prefix
@@ -443,7 +445,7 @@ def loopie(resp): #timer module
        if time.time() - main > random.randint(300, 400) and client.stopped != True:
         main=time.time()
         print(f"{at()} {client.color.okblue}[INFO]{client.color.reset} Taking a break")
-        time.sleep(random.randint(40, 80))
+        time.sleep(random.randint(80, 150))
       if time.time() - daily_time > int(client.wait_time_daily) and client.stopped != True:
         daily()
         daily_time = time.time()
@@ -451,6 +453,10 @@ def loopie(resp): #timer module
        if time.time() - stop > int(client.stop):
          bot.gateway.close()
       if client.change.lower() == "yes" and client.stopped != True:
+        if time.time() - change > random.randint(3600, 4000):
+         print(f"{at()}{client.color.okcyan}[INFO] Restarting...  {client.color.reset}")
+         time.sleep(1)
+         os.execl(executable, executable, *argv)
         if time.time() - change > random.randint(600, 900):
          change=time.time()
          print(f"{at()} {client.color.okblue}[INFO]{client.color.reset} Changed Channel To: {client.channel2[1]}")
