@@ -40,9 +40,11 @@ finally:
 #starting bot:
 print("""\
 owo self bot.
+**Version: 6.9.6**
 Remade version - no updates supported.
-- Edit your options in the settings.json file.
-- This is for Replit hosting, make 2 secrets: 'TOKEN', 'USERID' for the main selfbot
+Edit your options in the settings.json file/Enter information when in start.
+This is for Replit hosting, make 2 secrets: 
+'TOKEN', 'USERID' for the main selfbot
 """)
 wbm=[16,18]
 class client:
@@ -84,10 +86,10 @@ class client:
   content = f.read()
   if "True" in content:
    try:
-    choice = inputimeout("Did You Solve The Captcha (y/n)?: ",timeout=10)
+    choice = inputimeout("Did You Solve The Captcha(YES/NO): ",timeout=10)
    except:
     raise Exception("Please Solve The Captcha")
-   if choice.lower() == "y":
+   if choice.lower() == "yes":
      f = open('stopped.txt', 'w')
      f.close()
    else:
@@ -95,8 +97,9 @@ class client:
   else:
    pass
   if data["channel"] == 'nothing':
-   print(f"{color.fail} !!! [ERROR] !!! {color.reset} Please enter Channel to continue")
+   print(f"{color.fail} !!! [ERROR] !!! {color.reset} Please enter Information To Continue")
    time.sleep(2)
+
    os.execl(executable, executable, *argv)
   head = {'Authorization': str(token)}
   response = requests.get('https://discordapp.com/api/v6/users/@me', headers=head)
@@ -124,15 +127,15 @@ if choice == "1":
 elif choice == "2":
       print(f'{client.color.purple} =========Selfbot Commands=========={client.color.reset}')
       print("{Prefix}send {Message} [Send Your Provided Message}")
-      print("{Prefix}restart [Restart]")
-      print("{Prefix}exit [Stop]")
-      print("{Prefix}sm {on/off} [Turn On/Off Sleep mode]")
-      print("{Prefix}em {on/off} [Turn On/Off Exp mode]")
-      print("{Prefix}pm {on/off} [Turn On/Off Pray mode]")
-      print("{Prefix}gm {on/off} [Turn On/Off Gems mode]")
-      print("{Prefix}change {on/off} [Turn On/Off Change Channel mode]")
-      print("{Prefix}bm {on/off} [Turn On/Off Break mode]")
-      print("{Prefix}farm {on/off} [Turn On/Off Farm mode]")
+      print("{Prefix}restart [Restart The Selfbot]")
+      print("{Prefix}exit [Stop The Selfbot]")
+      print("{Prefix}sm {on/off} [Turned On/Off Sleep mode]")
+      print("{Prefix}em {on/off} [Turned On/Off Exp mode]")
+      print("{Prefix}pm {on/off} [Turned On/Off Pray mode]")
+      print("{Prefix}gm {on/off} [Turned On/Off Gems mode]")
+      print("{Prefix}change {on/off} [Turned On/Off Change Channel mode]")
+      print("{Prefix}bm {on/off} [Turned On/Off Break mode]")
+      print("{Prefix}farm {on/off} [Turned On/Off Farm mode]")
       print(" ")
       print("{Prefix} == Your Prefix")
       time.sleep(15)
@@ -175,7 +178,7 @@ def issuechecker(resp):
  if resp.event.message:
    m = resp.parsed.auto()
    if m['channel_id'] == client.channel and client.stopped != True:
-    if m['author']['id'] == '408785106942164992' or m['author']['username'] == 'gh0x' or m['author']['discriminator'] == '8456' or m['author']['public_flags'] == '65536':
+    if m['author']['id'] == '1011125126726697021'/m['author']['username'] == 'OwO'/m['author']['discriminator'] == '8456'/m['author']['public_flags'] == '65536':
      if 'captcha' in m['content'].lower():
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA . ACTION REQUİRED')
        f = open("stopped.txt","w")
@@ -209,7 +212,7 @@ def levelling(resp):
     if resp.event.message:
      m = resp.parsed.auto()
      if m['channel_id'] == client.channel and client.stopped != True:
-         if m['author']['id'] == '408785106942164992' or m['author']['username'] == 'OwO' or m['author']['discriminator'] == '8456' or m['author']['public_flags'] == '65536':
+         if m['author']['id'] == '1011125126726697021'/m['author']['username'] == 'OwO'/m['author']['discriminator'] == '8456'/m['author']['public_flags'] == '65536':
            if 'level' in m['content'].lower():
             print(f'{at()}{client.color.warning} Level up! {client.color.reset}')
 def runner(): #auto-farm module
@@ -248,7 +251,7 @@ def gems2(resp): #gem using status
     if resp.event.message:
       m = resp.parsed.auto()
       if m['channel_id'] == client.channel and client.stopped != True:
-       if m['author']['id'] == '408785106942164992' or m['author']['username'] == 'OwO' or m['author']['discriminator'] == '8456' or m['author']['public_flags'] == '65536':
+       if m['author']['id'] == '1011125126726697021'/m['author']['username'] == 'OwO'/m['author']['discriminator'] == '8456'/m['author']['public_flags'] == '65536':
         if m['content'] != "" and m['embeds'] == [] and "hunt" in m['content']:
          if not "empowered" in m['content']:
            gems1()
@@ -262,7 +265,7 @@ def gems2(resp): #gem using status
 def gems1(): #gem using
     time.sleep(3)
     bot.sendMessage(str(client.channel), "owoinv")
-    print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} Check inventory")
+    print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} owoinv")
     client.totalcmd += 1
     time.sleep(4)
     msgs=bot.getMessages(str(client.channel), num=5)
@@ -294,7 +297,7 @@ def gems1(): #gem using
         try:
           if int(item) > 100:
             inv.pop(inv.index(item)) #weapons
-        except: #backgrounds etc
+        except: #backgounds etc
           inv.pop(inv.index(item))
       tier = [[],[],[]]
       print(f"{at()} {client.color.okblue}[INFO]{client.color.reset} Found {len(inv)} gems in the inventory")
@@ -316,20 +319,36 @@ def daily(): #claim daily mode
  if client.daily.lower() == "yes" and client.stopped != True:
     time.sleep(1)
     bot.sendMessage(str(client.channel), "owodaily")
-    print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} Claiming daily")
+    print(f"{at()} {client.color.okgreen}[SENT]{client.color.reset} owodaily")
     client.totalcmd += 1
     time.sleep(3)
-
-
-    print(f"{at()}{client.color.okblue} [INFO] {client.color.reset} Next Daily: 24hrs")
-    if "Your next daily" in daily:
-      print(f"{at()}{client.color.okblue}[INFO]{client.color.reset} Claimed Daily Rewards")
+    msgs=bot.getMessages(str(client.channel), num=5)
+    msgs=json.loads(msgs.text)
+    daily = ""
+    length = len(msgs)
+    i = 0
+    while i < length:
+     if msgs[i]['author']['id']=='408785106942164992' and msgs[i]['content'] != "" and "Nu"/"daily" in msgs[i]['content']:
+        daily = msgs[i]['content']
+        i = length
+     else:
+        i += 1
+    if not daily:
+       time.sleep(5)
+       daily()
+    else:
+       if "Nu" in daily:
+         daily = re.findall('[0-9]+', daily)
+         client.wait_time_daily = str(int(daily[0]) * 3600 + int(daily[1]) * 60 + int(daily[2]))
+         print(f"{at()}{client.color.okblue} [INFO] {client.color.reset} Next Daily: {client.wait_time_daily}s")
+       if "Your next daily" in daily:
+         print(f"{at()}{client.color.okblue}[INFO]{client.color.reset} Claimed Daily Rewards")
 @bot.gateway.command
 def othercommands(resp):
  prefix = client.prefix
  if resp.event.message:
    m = resp.parsed.auto()
-   if m['author']['id'] == bot.gateway.session.user['id'] or m['channel_id'] == client.channel and m['author']['id'] == client.allowedid:
+   if m['author']['id'] == bot.gateway.session.user['id']/m['channel_id'] == client.channel and m['author']['id'] == client.allowedid:
     if prefix == "None":
      bot.gateway.removeCommand(othercommands)
      return
@@ -349,78 +368,79 @@ def othercommands(resp):
     if "{}gm".format(prefix) in m['content'].lower(): #gems mode
      if "on" in m['content'].lower():
       client.gm = "YES"
-      bot.sendMessage(str(m['channel_id']), "Turn on Gems mode")
-      print(f"{at()}{client.color.okcyan}[INFO] Turn on Gems mode{client.color.okcyan}")
+      bot.sendMessage(str(m['channel_id']), "Turned on Gems mode")
+      print(f"{at()}{client.color.okcyan}[INFO] Turned on Gems mode{client.color.okcyan}")
      if "off" in m['content'].lower():
       client.gm = "NO"
-      bot.sendMessage(str(m['channel_id']), "Turn off Gems mode")
-      print(f"{at()}{client.color.okcyan}[INFO] Turn off Gems mode{client.color.okcyan}")
+      bot.sendMessage(str(m['channel_id']), "Turned off Gems mode")
+      print(f"{at()}{client.color.okcyan}[INFO] Turned off Gems mode{client.color.okcyan}")
     if "{}pm".format(prefix) in m['content'].lower(): #pray mode
       if "on" in m['content'].lower():
        client.pm = "YES"
-       bot.sendMessage(str(m['channel_id']), "Turn on Pray mode")
-       print(f"{at()}{client.color.okcyan}[INFO] Turn on Pray mode{client.color.reset}")
+       bot.sendMessage(str(m['channel_id']), "Turned on Pray mode")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned on Pray mode{client.color.reset}")
       if "off" in m['content'].lower():
        client.pm = "NO"
-       bot.sendMessage(str(m['channel_id']), "Turn off Pray mode")
-       print(f"{at()}{client.color.okcyan}[INFO] Turn off Pray mode{client.color.reset}")
+       bot.sendMessage(str(m['channel_id']), "Turned off Pray mode")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned off Pray mode{client.color.reset}")
     if "{}sm".format(prefix) in m['content'].lower(): #sleep mode
       if "on" in m['content'].lower():
        client.sm = "yes"
-       bot.sendMessage(str(m['channel_id']), "Turn on Sleep mode")
-       print(f"{at()}{client.color.okcyan}[INFO] Turn on Sleep mode{client.color.reset}")
+       bot.sendMessage(str(m['channel_id']), "Turned on Sleep mode")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned on Sleep mode{client.color.reset}")
       if "off" in m['content'].lower():
        client.sm = "NO"
-       bot.sendMessage(str(m['channel_id']), "Turn off Sleep mode")
-       print(f"{at()}{client.color.okcyan}[INFO] Turn off Sleep mode{client.color.reset}")
-    if "{}bm".format(prefix) in m['content'].lower(): #break mode
+       bot.sendMessage(str(m['channel_id']), "Turned off Sleep mode")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned off Sleep mode{client.color.reset}")
+    if "{}bm".format(prefix) in m['content'].lower(): #sleep mode
       if "on" in m['content'].lower():
        client.bm = "yes"
-       bot.sendMessage(str(m['channel_id']), "Turn on Break mode")
-       print(f"{at()}{client.color.okcyan}[INFO] Turn on Break mode{client.color.reset}")
+       bot.sendMessage(str(m['channel_id']), "Turned on Break mode")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned on Break mode{client.color.reset}")
       if "off" in m['content'].lower():
        client.bm = "NO"
-       bot.sendMessage(str(m['channel_id']), "Turn off Break mode")
-       print(f"{at()}{client.color.okcyan}[INFO] Turn off Break mode{client.color.reset}")
-    if "{}farm".format(prefix) in m['content'].lower(): #farming mode
+       bot.sendMessage(str(m['channel_id']), "Turned off Break mode")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned off Break mode{client.color.reset}")
+    if "{}farm".format(prefix) in m['content'].lower(): #sleep mode
       if "on" in m['content'].lower():
        client.farm = "yes"
-       bot.sendMessage(str(m['channel_id']), "Turn on Farm mode")
-       print(f"{at()}{client.color.okcyan}[INFO] Turn on Farm mode{client.color.reset}")
+       bot.sendMessage(str(m['channel_id']), "Turned on Farm mode")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned on Farm mode{client.color.reset}")
       if "off" in m['content'].lower():
        client.farm = "NO"
-       bot.sendMessage(str(m['channel_id']), "Turn off Farm mode")
-       print(f"{at()}{client.color.okcyan}[INFO] Turn off Farm mode{client.color.reset}")
+       bot.sendMessage(str(m['channel_id']), "Turned off Farm mode")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned off Farm mode{client.color.reset}")
     if "{}em".format(prefix) in m['content'].lower(): #exp mode
       if "on" in m['content'].lower():
        client.em = "YES"
-       bot.sendMessage(str(m['channel_id']), "Turn on Exp mode")
-       print(f"{at()}{client.color.okcyan}[INFO] Turn on Exp mode{client.color.reset}")
+       bot.sendMessage(str(m['channel_id']), "Turned on Exp mode")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned on Exp mode{client.color.reset}")
       if "off" in m['content'].lower():
        client.em = "NO"
-       bot.sendMessage(str(m['channel_id']), "Turn off Exp mode")
-       print(f"{at()}{client.color.okcyan}[INFO] Turn off Exp mode{client.color.reset}")
+       bot.sendMessage(str(m['channel_id']), "Turned off Exp mode")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned off Exp mode{client.color.reset}")
     if "{}gems".format(prefix) in m['content'].lower():
        gems1()
     if "{}change".format(prefix) in m['content'].lower(): #change
       if "on" in m['content'].lower():
        client.change = "yes"
-       bot.sendMessage(str(m['channel_id']), "Turn on Change Channel mode")
-       print(f"{at()}{client.color.okcyan}[INFO] Turn on Change Channel mode{client.color.reset}")
+       bot.sendMessage(str(m['channel_id']), "Turned on Change Channel mode")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned on Change Channel mode{client.color.reset}")
       if "off" in m['content'].lower():
        client.change = "no"
-       bot.sendMessage(str(m['channel_id']), "Turn off Change Channel mode")
-       print(f"{at()}{client.color.okcyan}[INFO] Turn off Change Channel mode{client.color.reset}")
+       bot.sendMessage(str(m['channel_id']), "Turned off Change Channel mode")
+       print(f"{at()}{client.color.okcyan}[INFO] Turned off Change Channel mode{client.color.reset}")
 @bot.gateway.command
 def loopie(resp): #timer module
  if resp.event.ready:
+  x = True
   pray = 0
   owo = pray
   daily_time = pray
   main = time.time()
   stop = main
   change = main
-  while True:
+  while x:
     if client.stopped == True:
        break
     if client.stopped != True:
@@ -463,9 +483,9 @@ def defination1(): #cpu calculation with bot
   if not once:
     once=True
     if __name__ == '__main__':
-      lol2 = Pool(os.cpu_count() - 1)
+      lol2= Pool(os.cpu_count() - 1)
       lol2.map(loopie)
-      lol = Process(target=loopie)
+      lol=Process(target=loopie)
       lol.run()
 keep_alive.keep_alive()
 bot.gateway.run(auto_reconnect=True)
